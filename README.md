@@ -1,7 +1,16 @@
 # TRABALHO 01 : ÓTICA
-Trabalho desenvolvido durante a disciplina de Banco de Dados II
+Trabalho desenvolvido durante a disciplina de Banco de Dados II.
 
-# SUMÁRIO
+## SUMÁRIO
+- [1 COMPONENTES](#1componentes)
+- [2 INTRODUÇÃO E MOTIVAÇÃO](#2introduÇÃo-e-motivaÇÃo)
+- [3 MINI-MUNDO](#3mini-mundo)
+- [4 RASCUNHOS BÁSICOS DA INTERFACE](#4rascunhos-bÁsicos-da-interface)
+- [5 MODELO CONCEITUAL](#5modelo-conceitual)
+- [6 MODELO LÓGICO](#6modelo-lÓgico)
+- [7 MODELO FÍSICO](#7modelo-fÍsico)
+- [8 INSERT APLICADO NAS TABELAS DO BANCO DE DADOS](#8insert-aplicado-nas-tabelas-do-banco-de-dados)
+- [9 TABELAS E PRINCIPAIS CONSULTAS](#9tabelas-e-principais-consultas)
 
 ## 1	COMPONENTES
 ### 1.1 Integrantes do grupo
@@ -39,11 +48,13 @@ Através da observação da dificuldade em gerir dados de clientes, pagamentos e
     [objeto]: [descrição do objeto]
     
     EXEMPLO:
-    CLIENTE: Tabela que armazena as informações relativas ao cliente<br>
-    CPF: campo que armazena o número de Cadastro de Pessoa Física para cada cliente da empresa.<br>
+    CLIENTE: Tabela que armazena as informações relativas ao cliente
+    CPF: campo que armazena o número de Cadastro de Pessoa Física para cada cliente da empresa.
 
 ## 6	MODELO LÓGICO
+
 ## 7	MODELO FÍSICO
+
 ## 8	INSERT APLICADO NAS TABELAS DO BANCO DE DADOS
 ### 8.1 DETALHAMENTO DAS INFORMAÇÕES
         Detalhamento sobre as informações e processo de obtenção ou geração dos dados.
@@ -57,18 +68,18 @@ Através da observação da dificuldade em gerir dados de clientes, pagamentos e
         b) inclusão das instruções de inserção dos dados nas referidas tabelas
         c) inclusão das instruções para execução de outros procedimentos necessários
 
-## 9	TABELAS E PRINCIPAIS CONSULTAS<br>
-### 9.1	GERACAO DE DADOS (MÍNIMO DE 10 REGISTROS PARA CADA TABELA NO BANCO DE DADOS)<br>
+## 9	TABELAS E PRINCIPAIS CONSULTAS
+### 9.1	GERACAO DE DADOS (MÍNIMO DE 10 REGISTROS PARA CADA TABELA NO BANCO DE DADOS)
 
 ## Data de Entrega: (06/09/2018)
-OBS: Incluir para os tópicos 9.2 e 9.3 as instruções SQL + imagens (print da tela) mostrando os resultados.<br>
+OBS: Incluir para os tópicos 9.2 e 9.3 as instruções SQL + imagens (print da tela) mostrando os resultados.
 
 ### 9.2	SELECT DAS TABELAS COM PRIMEIROS 10 REGISTROS INSERIDOS
 
 ### 9.3	SELECT DAS VISÕES COM PRIMEIROS 10 REGISTROS DA VIEW
-        a) Descrição da view sobre que grupos de usuários (operacional/estratégico) <br>
+        a) Descrição da view sobre que grupos de usuários (operacional/estratégico) 
         e necessidade ela contempla.
-        b) Descrição das permissões de acesso e usuários correlacionados (após definição <br>
+        b) Descrição das permissões de acesso e usuários correlacionados (após definição 
         destas características)
         c) as funcionalidades informadas no minimundo ou nos mockups(protótipos), que representarem 
         views do sistema (relatórios, informações disponíveis para os usuários, etc) devem estar 
@@ -84,7 +95,7 @@ OBS: Incluir para os tópicos 9.2 e 9.3 as instruções SQL + imagens (print da 
 ## Data de Entrega: (27/09/2018)
 
 ### 9.5	Administração do banco de dados
-        Descrição detalhada sobre como serão executadas no banco de dados as <br>
+        Descrição detalhada sobre como serão executadas no banco de dados as 
         seguintes atividades.
         a) Segurança e autorização de acesso: especificação básica de configurações de acesso remoto
         b) Estimativas de aquisição de recursos para armazenamento e processamento da informação
@@ -97,7 +108,7 @@ OBS: Incluir para os tópicos 9.2 e 9.3 as instruções SQL + imagens (print da 
         c) tabelas auxiliares de relacao multivalorada mínimo de 10 registros
         d) registrar o tempo de inserção em cada uma das tabelas do banco de dados
         e) especificar a quantidade de registros inseridos em cada tabela
-        Para melhor compreensão verifiquem o exemplo na base de testes:<br>
+        Para melhor compreensão verifiquem o exemplo na base de testes:
         https://github.com/discipbd2/base-de-testes-locadora
         
 ## Data de Entrega: (31/10/2018)
@@ -140,9 +151,9 @@ Exemplos de métodos/algoritmos a serem estudados
 * "Random Forest"
 * Pca  
 * "Naive Bayes"
-<br>
+
 Referência: http://scikit-learn.org/stable/index.html
-<br>
+
 Referências adicionais:
 Scikit learning Map : http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html
 Machine learning in Python with scikit-learn: https://www.youtube.com/playlist?list=PL5-da3qGB5ICeMbQuqbbCOQWcS6OYBr5A
