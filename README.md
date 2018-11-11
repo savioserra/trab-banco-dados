@@ -66,7 +66,7 @@ Através da observação da dificuldade em gerir dados de clientes, pagamentos e
 
 ## 7 MODELO FÍSICO
 
-![ModeloFisico](https://raw.githubusercontent.com/savioserra/trab-banco-dados/develop/artifacts/images/modelo_fisico.png)
+![ModeloFisico](https://i.imgur.com/14QkrIz.png)
 
 ## 8 INSERT APLICADO NAS TABELAS DO BANCO DE DADOS
 
