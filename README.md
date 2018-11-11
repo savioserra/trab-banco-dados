@@ -159,13 +159,25 @@ Através da observação da dificuldade em gerir dados de clientes, pagamentos e
 
 ### 9.6 GERACAO DE DADOS (MÍNIMO DE 1,5 MILHÃO DE REGISTROS PARA PRINCIPAL RELAÇAO)
 
-        a) principal tabela do sistema deve ter no mínimo 1,5 milhão de registros
-        b) tabelas diretamente relacionadas a tabela principal 100 mil registros
-        c) tabelas auxiliares de relacao multivalorada mínimo de 10 registros
-        d) registrar o tempo de inserção em cada uma das tabelas do banco de dados
-        e) especificar a quantidade de registros inseridos em cada tabela
-        Para melhor compreensão verifiquem o exemplo na base de testes:
-        https://github.com/discipbd2/base-de-testes-locadora
+| Tabela                    | Quantidade de registros |
+| :-----------------------: | :---------------------: |
+| `addresses`               | 500                     |
+| `cities`                  | 50                      |
+| `clients`                 | 500                     |
+| `contact_types`           | 1                       |
+| `contacts`                | 500                     |
+| `invoices`                | 1000000                 |
+| `item_categories`         | 1                       |
+| `items_stock`             | 1000000                 |
+| `payment_methods`         | 2                       |
+| `profile_characteristics` | 1500                    |
+| `profile_schemas`         | 3                       |
+| `profiles`                | 500                     |
+| `sales`                   | 1000000                 |
+| `schema_characteristics`  | 9                       |
+| `states`                  | 10                      |
+| `statuses`                | 3                       |
+| `user_characteristics`    | 3                       |
 
 ### 9.7 BACKUP
 
