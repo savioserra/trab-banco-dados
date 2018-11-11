@@ -4,15 +4,25 @@ Trabalho desenvolvido durante a disciplina de Banco de Dados II.
 
 ## SUMÁRIO
 
-- [1 COMPONENTES](#1componentes)
-- [2 INTRODUÇÃO E MOTIVAÇÃO](#2introduÇÃo-e-motivaÇÃo)
-- [3 MINI-MUNDO](#3mini-mundo)
-- [4 RASCUNHOS BÁSICOS DA INTERFACE](#4rascunhos-bÁsicos-da-interface)
-- [5 MODELO CONCEITUAL](#5modelo-conceitual)
-- [6 MODELO LÓGICO](#6modelo-lÓgico)
-- [7 MODELO FÍSICO](#7modelo-fÍsico)
-- [8 INSERT APLICADO NAS TABELAS DO BANCO DE DADOS](#8insert-aplicado-nas-tabelas-do-banco-de-dados)
-- [9 TABELAS E PRINCIPAIS CONSULTAS](#9tabelas-e-principais-consultas)
+- [SUMÁRIO](#sum%C3%A1rio)
+- [1 COMPONENTES](#1-componentes)
+- [2 INTRODUÇÃO E MOTIVAÇÃO](#2-introdu%C3%A7%C3%A3o-e-motiva%C3%A7%C3%A3o)
+- [3 MINI-MUNDO](#3-mini-mundo)
+- [4 RASCUNHOS BÁSICOS DA INTERFACE](#4-rascunhos-b%C3%A1sicos-da-interface)
+- [5 MODELO CONCEITUAL](#5-modelo-conceitual)
+    - [5.1 NOTACAO ENTIDADE RELACIONAMENTO](#51-notacao-entidade-relacionamento)
+    - [5.2 DECISÕES DE PROJETO](#52-decis%C3%B5es-de-projeto)
+    - [5.3 DESCRIÇÃO DOS DADOS](#53-descri%C3%A7%C3%A3o-dos-dados)
+        - [5.3.1 DOMÍNIO IDENTIDADE](#531-dom%C3%ADnio-identidade)
+        - [5.3.2 DOMÍNIO PAGAMENTO](#532-dom%C3%ADnio-pagamento)
+        - [5.3.3 DOMÍNIO FISCAL](#533-dom%C3%ADnio-fiscal)
+        - [5.3.4 DOMÍNIO SERVIÇO](#534-dom%C3%ADnio-servi%C3%A7o)
+        - [5.3.5 DOMÍNIO ESTOQUE](#535-dom%C3%ADnio-estoque)
+- [6 MODELO LÓGICO](#6-modelo-l%C3%B3gico)
+- [7 MODELO FÍSICO](#7-modelo-f%C3%ADsico)
+- [8 INSERT APLICADO NAS TABELAS DO BANCO DE DADOS](#8-insert-aplicado-nas-tabelas-do-banco-de-dados)
+    - [8.1 DETALHAMENTO DAS INFORMAÇÕES](#81-detalhamento-das-informa%C3%A7%C3%B5es)
+    - [8.2 SCRIPT PARA CRIAÇÃO DE TABELAS E INSERÇÃO DOS DADOS](#82-script-para-cria%C3%A7%C3%A3o-de-tabelas-e-inser%C3%A7%C3%A3o-dos-dados)
 
 ## 1 COMPONENTES
 
@@ -47,20 +57,64 @@ Através da observação da dificuldade em gerir dados de clientes, pagamentos e
 
 ### 5.2 DECISÕES DE PROJETO
 
-    [atributo]: [descrição da decisão]
+    Campos Id: Todos os campos que se referem à `id`s foram implementados utilizando o tipo [`uuid`](https://www.postgresql.org/docs/9.1/datatype-uuid.html). Essa decisão foi tomada para evitar problemas futuros ao realizar merge com réplicas do banco de dados, onde chaves poderiam colidir. Outro motivo por trás dessa decisão é obscurecer a chave primária, uma vez que essa pode ser exposta em um web-service.
 
-    EXEMPLO:
-    a) Campo endereço: em nosso projeto optamos por um campo multivalorado e composto, pois a empresa
-    pode possuir para cada departamento mais de uma localização...
-    b) justifique!
+    Perfis: Ao invés de herança, foi adotada uma estratégia focada em perfis: uma entidade do sistema possui vários perfis. Perfis possuem tipos (definidos na tabela `profile_schemas`), e seus atributos são representados na tabela `profile_characteristics`. Isso permite que novos atributos possam ser adicionados ou desabilitados sem que a estrutura do banco de dados mude, abrindo mão de performance.
+
+    Itens: No mini-mundo, uma venda é constituida por itens e ordens de serviço. Porém, ordens de serviços também podem conter itens. Optou-se para que a tabela `items_stock` possua ambas as chaves estrangeiras, existindo a possibilidade que o campo `service_id` seja nulo.
 
 ### 5.3 DESCRIÇÃO DOS DADOS
 
-    [objeto]: [descrição do objeto]
+#### 5.3.1 DOMÍNIO IDENTIDADE
 
-    EXEMPLO:
-    CLIENTE: Tabela que armazena as informações relativas ao cliente
-    CPF: campo que armazena o número de Cadastro de Pessoa Física para cada cliente da empresa.
+| Tabela                         | Descrição                                                                                                                                            |
+| :----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `states`                       | Relação de estados (localização).                                                                                                                    |
+| `cities`                       | Relação de cidades (localização).                                                                                                                    |
+| `clients`                      | Relação de entidades do sistema. Cada entidade possui vários perfis.                                                                                 |
+| `addresses`                    | Relação de endereços. Cada perfil possui no máximo um endereço.                                                                                      |
+| `contact_types`                | Relação dos tipos de dados de contatos, como telefone.                                                                                               |
+| `user_characteristics`         | Relação de todas as características que um perfil pode ter.                                                                                          |
+| `profile_schemas`              | Relação dos esquemas de perfis. Exemplo: Cliente, Funcionário, Médico.                                                                               |
+| `schema_characteristics`       | Junto com a tabela `profile_schemas`, define o conjunto de características que um determinado perfil pode ter. Exemplo: Funcionário: Senha, Login... |
+| `profiles`                     | Relação dos perfis existentes. Um perfil possui um esquema a qual pertence.                                                                          |
+| `contacts`                     | Relação das informações de contato dos perfis.                                                                                                       |
+| `profile_characteristics`      | Relação das informações dos perfis.                                                                                                                  |
+| `tokens`                       | Relação dos tokens de sessão de usuários logados.                                                                                                    |
+| `prescriptions`                | Relação das receitas médicas.                                                                                                                        |
+| `prescription_characteristics` | Relação dos tipos de dados das receitas.                                                                                                             |
+| `prescription_infos`           | Relação das informações das receitas.                                                                                                                |
+
+#### 5.3.2 DOMÍNIO PAGAMENTO
+
+| Tabela            | Descrição                                         |
+| :---------------- | ------------------------------------------------- |
+| `payment_methods` | Relação dos métodos de pagamento disponíveis.     |
+| `payments`        | Relação dos pagamentos (executados ou previstos). |
+| `sales`           | Relação das vendas.                               |
+
+
+
+#### 5.3.3 DOMÍNIO FISCAL
+
+| Tabela     | Descrição                  |
+| :--------- | -------------------------- |
+| `invoices` | Relação das notas fiscais. |
+
+#### 5.3.4 DOMÍNIO SERVIÇO
+
+| Tabela             | Descrição                                        |
+| :----------------- | ------------------------------------------------ |
+| `statuses`         | Relação dos estados que um serviço pode assumir. |
+| `services`         | Relação dos serviços.                            |
+| `service_statuses` | Relação do histórico de estados dos serviços.    |
+
+#### 5.3.5 DOMÍNIO ESTOQUE
+
+| Tabela            | Descrição                                                 |
+| :---------------- | --------------------------------------------------------- |
+| `items_stock`     | Relação de todos os itens.                                |
+| `item_categories` | Relação das categorias de itens. Exemplo: Armação, Lente. |
 
 ## 6 MODELO LÓGICO
 
@@ -70,6 +124,8 @@ Através da observação da dificuldade em gerir dados de clientes, pagamentos e
 
 ## 8 INSERT APLICADO NAS TABELAS DO BANCO DE DADOS
 
+![Seed](https://i.imgur.com/ydPTiL1.gif)
+
 ### 8.1 DETALHAMENTO DAS INFORMAÇÕES
 
         Detalhamento sobre as informações e processo de obtenção ou geração dos dados.
@@ -78,31 +134,11 @@ Através da observação da dificuldade em gerir dados de clientes, pagamentos e
         b) obtenção de códigos reutilizados
         c) fontes de estudo para desenvolvimento do projeto
 
-### 8.2 INCLUSÃO DO SCRIPT PARA CRIAÇÃO DE TABELAS E INSERÇÃO DOS DADOS (ARQUIVO ÚNICO COM):
+### 8.2 SCRIPT PARA CRIAÇÃO DE TABELAS E INSERÇÃO DOS DADOS
 
-        a) inclusão das instruções para criação das tabelas e estruturas de amazenamento do BD
-        b) inclusão das instruções de inserção dos dados nas referidas tabelas
-        c) inclusão das instruções para execução de outros procedimentos necessários
+    Verificar `create.sql` na pasta artifacts/sql.
 
 ## 9 TABELAS E PRINCIPAIS CONSULTAS
-
-### 9.1 GERACAO DE DADOS (MÍNIMO DE 10 REGISTROS PARA CADA TABELA NO BANCO DE DADOS)
-
-## Data de Entrega: (06/09/2018)
-
-OBS: Incluir para os tópicos 9.2 e 9.3 as instruções SQL + imagens (print da tela) mostrando os resultados.
-
-### 9.2 SELECT DAS TABELAS COM PRIMEIROS 10 REGISTROS INSERIDOS
-
-### 9.3 SELECT DAS VISÕES COM PRIMEIROS 10 REGISTROS DA VIEW
-
-        a) Descrição da view sobre que grupos de usuários (operacional/estratégico)
-        e necessidade ela contempla.
-        b) Descrição das permissões de acesso e usuários correlacionados (após definição
-        destas características)
-        c) as funcionalidades informadas no minimundo ou nos mockups(protótipos), que representarem
-        views do sistema (relatórios, informações disponíveis para os usuários, etc) devem estar
-        presentes aqui.
 
 ### 9.4 LISTA DE CODIGOS DAS FUNÇÕES, ASSERÇOES E TRIGGERS
 
@@ -111,8 +147,6 @@ OBS: Incluir para os tópicos 9.2 e 9.3 as instruções SQL + imagens (print da 
         b) Código do objeto (função/trigger/asserção)
         c) exemplo de dados para aplicação
         d) resultados em forma de tabela/imagem
-
-## Data de Entrega: (27/09/2018)
 
 ### 9.5 Administração do banco de dados
 
@@ -133,9 +167,7 @@ OBS: Incluir para os tópicos 9.2 e 9.3 as instruções SQL + imagens (print da 
         Para melhor compreensão verifiquem o exemplo na base de testes:
         https://github.com/discipbd2/base-de-testes-locadora
 
-## Data de Entrega: (31/10/2018)
-
-### 9.7 Backup do Banco de Dados
+### 9.7 BACKUP
 
         Detalhamento do backup.
         a) Tempo
@@ -154,8 +186,6 @@ OBS: Incluir para os tópicos 9.2 e 9.3 as instruções SQL + imagens (print da 
     e) As imagens do Explain devem ser inclusas no trabalho, bem como explicações sobre os resultados obtidos.
     f) Inclusão de tabela mostrando as 10 execuções, excluindo-se o maior e menor tempos para cada consulta e
     obtendo-se a media dos outros valores como resultado médio final.
-
-## Data de Entrega: (22/11/2018)
 
 ### 9.9 TRABALHO EM DUPLA - Machine Learning e Data Mining
 
@@ -190,9 +220,3 @@ Machine learning in Python with scikit-learn: https://www.youtube.com/playlist?l
 ## Data de Entrega: (06/12/2018)
 
 ## 10 ATUALIZAÇÃO DA DOCUMENTAÇÃO/ SLIDES E ENTREGA FINAL
-
-### OBSERVAÇÕES
-
-Link para BrModelo:
-
-- http://sis4.com/brModelo/brModelo/download.html

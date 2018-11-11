@@ -19,7 +19,7 @@ if __name__ == "__main__":
     sess.add_all([models.PaymentMethod(name=k) for k in ['Cartão', 'Dinheiro']])
     sess.add_all([models.ItemCategory(name=k) for k in ['Armação']])
     sess.add_all([models.ContactType(name=k) for k in ['Telefone']])
-    sess.add_all([models.State(name=faker.state(), abrev=faker.state_abbr()) for k in range(10)])
+    sess.add_all([models.State(name=faker.state(), abbr=faker.state_abbr()) for k in range(10)])
 
     sess.commit()
 
@@ -34,7 +34,7 @@ if __name__ == "__main__":
 
     for schema in schemas:
         sess.add_all([
-            models.SchemaCharacteristic(profile_schemas=schema, characteristics=k, is_nullable=False)
+            models.SchemaCharacteristic(profile_schemas=schema, user_characteristics=k, is_nullable=False)
             for k in characteristics
         ])
 
@@ -55,10 +55,10 @@ if __name__ == "__main__":
             models.ProfileCharacteristic(
                 profiles=profile,
                 schema_characteristics=k,
-                characteristic_info=faker.password() if k.characteristics.name == 'Senha' else
-                faker.name() if k.characteristics.name == 'Nome' else faker.email())
-            for k in sess.query(models.SchemaCharacteristic).options(joinedload('characteristics')).filter(
-                models.SchemaCharacteristic.profile_schema_id == profile.profile_schemas.id)
+                characteristic_info=faker.password() if k.user_characteristics.name == 'Senha' else
+                faker.name() if k.user_characteristics.name == 'Nome' else faker.email())
+            for k in sess.query(models.SchemaCharacteristic).options(joinedload('user_characteristics')).
+            filter(models.SchemaCharacteristic.profile_schema_id == profile.profile_schemas.id)
         ]
 
         contact = models.Contact(
@@ -72,7 +72,7 @@ if __name__ == "__main__":
     payment_methods = sess.query(models.PaymentMethod).all()
     category = sess.query(models.ItemCategory).first()
 
-    for k in range(int(1.5e6)):
+    for k in range(int(1e6)):
         profiles = sess.query(models.Profile).order_by(func.random()).limit(4)
 
         sale = models.Sale(
@@ -89,7 +89,8 @@ if __name__ == "__main__":
                 invoices=invoice,
                 sales=sale,
                 cost_price=0,
-                sale_price=random.randrange(1000)) for k in range(random.randrange(1, 10))
+                sale_price_spot=random.uniform(100, 800),
+                sale_price_forward=random.uniform(800, 1000))
         ]
 
         sess.add_all([sale, invoice, *items])
