@@ -142,27 +142,36 @@ Através da observação da dificuldade em gerir dados de clientes, pagamentos e
 
 ## 9 TABELAS E PRINCIPAIS CONSULTAS
 
-> `select * from contacts limit 100`
+```sql
+select * from contacts limit 100
+```
 ![](https://i.imgur.com/KpgpBTm.png)
 
 
-> `select * from invoices limit 100`
+```sql
+select * from invoices limit 100
+```
 ![](https://i.imgur.com/jYvd5vh.png)
 
-> `select * from items_stock limit 100`
+```sql
+select * from items_stock limit 100
+```
 ![](https://i.imgur.com/DW8qnYy.png)
 
-> `select * from sales limit 100`
+```sql
+select * from sales limit 100
+```
 ![](https://i.imgur.com/IUONLzc.png)
 
-sql```
+```sql
 select profile_characteristics.characteristic_info, count(*) as total_sales from user_characteristics
 join schema_characteristics on schema_characteristics.characteristic_id = user_characteristics.id
 join profile_characteristics on profile_characteristics.schema_characteristic_id = schema_characteristics.id
 join profiles on profiles.id = profile_characteristics.profile_id
 join sales on sales.executor_profile_id = profiles.id
 where user_characteristics.id = 'fed3941a-99a0-4077-880e-a466be5040c4'
-group by profile_characteristics.characteristic_info```
+group by profile_characteristics.characteristic_info
+```
 
 ![](https://i.imgur.com/xRibtGz.png)
 ### 9.4 LISTA DE CODIGOS DAS FUNÇÕES, ASSERÇOES E TRIGGERS
