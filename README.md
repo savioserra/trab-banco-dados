@@ -4,25 +4,37 @@ Trabalho desenvolvido durante a disciplina de Banco de Dados II.
 
 ## SUMÁRIO
 
-- [SUMÁRIO](#sum%C3%A1rio)
-- [1 COMPONENTES](#1-componentes)
-- [2 INTRODUÇÃO E MOTIVAÇÃO](#2-introdu%C3%A7%C3%A3o-e-motiva%C3%A7%C3%A3o)
-- [3 MINI-MUNDO](#3-mini-mundo)
-- [4 RASCUNHOS BÁSICOS DA INTERFACE](#4-rascunhos-b%C3%A1sicos-da-interface)
-- [5 MODELO CONCEITUAL](#5-modelo-conceitual)
-    - [5.1 NOTACAO ENTIDADE RELACIONAMENTO](#51-notacao-entidade-relacionamento)
-    - [5.2 DECISÕES DE PROJETO](#52-decis%C3%B5es-de-projeto)
-    - [5.3 DESCRIÇÃO DOS DADOS](#53-descri%C3%A7%C3%A3o-dos-dados)
-        - [5.3.1 DOMÍNIO IDENTIDADE](#531-dom%C3%ADnio-identidade)
-        - [5.3.2 DOMÍNIO PAGAMENTO](#532-dom%C3%ADnio-pagamento)
-        - [5.3.3 DOMÍNIO FISCAL](#533-dom%C3%ADnio-fiscal)
-        - [5.3.4 DOMÍNIO SERVIÇO](#534-dom%C3%ADnio-servi%C3%A7o)
-        - [5.3.5 DOMÍNIO ESTOQUE](#535-dom%C3%ADnio-estoque)
-- [6 MODELO LÓGICO](#6-modelo-l%C3%B3gico)
-- [7 MODELO FÍSICO](#7-modelo-f%C3%ADsico)
-- [8 INSERT APLICADO NAS TABELAS DO BANCO DE DADOS](#8-insert-aplicado-nas-tabelas-do-banco-de-dados)
-    - [8.1 DETALHAMENTO DAS INFORMAÇÕES](#81-detalhamento-das-informa%C3%A7%C3%B5es)
-    - [8.2 SCRIPT PARA CRIAÇÃO DE TABELAS E INSERÇÃO DOS DADOS](#82-script-para-cria%C3%A7%C3%A3o-de-tabelas-e-inser%C3%A7%C3%A3o-dos-dados)
+- [TRABALHO 01 : ÓTICA](#trabalho-01--%C3%B3tica)
+    - [SUMÁRIO](#sum%C3%A1rio)
+    - [1 COMPONENTES](#1-componentes)
+        - [1.1 Integrantes do grupo](#11-integrantes-do-grupo)
+    - [2 INTRODUÇÃO E MOTIVAÇÃO](#2-introdu%C3%A7%C3%A3o-e-motiva%C3%A7%C3%A3o)
+    - [3 MINI-MUNDO](#3-mini-mundo)
+    - [4 RASCUNHOS BÁSICOS DA INTERFACE](#4-rascunhos-b%C3%A1sicos-da-interface)
+    - [5 MODELO CONCEITUAL](#5-modelo-conceitual)
+        - [5.1 NOTACAO ENTIDADE RELACIONAMENTO](#51-notacao-entidade-relacionamento)
+        - [5.2 DECISÕES DE PROJETO](#52-decis%C3%B5es-de-projeto)
+        - [5.3 DESCRIÇÃO DOS DADOS](#53-descri%C3%A7%C3%A3o-dos-dados)
+            - [5.3.1 DOMÍNIO IDENTIDADE](#531-dom%C3%ADnio-identidade)
+            - [5.3.2 DOMÍNIO PAGAMENTO](#532-dom%C3%ADnio-pagamento)
+            - [5.3.3 DOMÍNIO FISCAL](#533-dom%C3%ADnio-fiscal)
+            - [5.3.4 DOMÍNIO SERVIÇO](#534-dom%C3%ADnio-servi%C3%A7o)
+            - [5.3.5 DOMÍNIO ESTOQUE](#535-dom%C3%ADnio-estoque)
+    - [6 MODELO LÓGICO](#6-modelo-l%C3%B3gico)
+    - [7 MODELO FÍSICO](#7-modelo-f%C3%ADsico)
+    - [8 INSERT APLICADO NAS TABELAS DO BANCO DE DADOS](#8-insert-aplicado-nas-tabelas-do-banco-de-dados)
+        - [8.1 SCRIPT PARA CRIAÇÃO DE TABELAS E INSERÇÃO DOS DADOS](#81-script-para-cria%C3%A7%C3%A3o-de-tabelas-e-inser%C3%A7%C3%A3o-dos-dados)
+    - [9 TABELAS E PRINCIPAIS CONSULTAS](#9-tabelas-e-principais-consultas)
+        - [9.4 LISTA DE CODIGOS DAS FUNÇÕES, ASSERÇOES E TRIGGERS](#94-lista-de-codigos-das-fun%C3%A7%C3%B5es-asser%C3%A7oes-e-triggers)
+        - [9.5 Administração do banco de dados](#95-administra%C3%A7%C3%A3o-do-banco-de-dados)
+        - [9.6 GERACAO DE DADOS (MÍNIMO DE 1,5 MILHÃO DE REGISTROS PARA PRINCIPAL RELAÇAO)](#96-geracao-de-dados-m%C3%ADnimo-de-15-milh%C3%A3o-de-registros-para-principal-rela%C3%A7ao)
+        - [9.7 BACKUP](#97-backup)
+        - [9.8 APLICAÇAO DE ÍNDICES E TESTES DE PERFORMANCE](#98-aplica%C3%A7ao-de-%C3%ADndices-e-testes-de-performance)
+        - [9.9 TRABALHO EM DUPLA - Machine Learning e Data Mining](#99-trabalho-em-dupla---machine-learning-e-data-mining)
+        - [Estudar algum dos algoritmos abaixo](#estudar-algum-dos-algoritmos-abaixo)
+        - [Incluir no trabalho os seguintes tópicos:](#incluir-no-trabalho-os-seguintes-t%C3%B3picos)
+    - [Data de Entrega: (06/12/2018)](#data-de-entrega-06122018)
+    - [10 ATUALIZAÇÃO DA DOCUMENTAÇÃO/ SLIDES E ENTREGA FINAL](#10-atualiza%C3%A7%C3%A3o-da-documenta%C3%A7%C3%A3o-slides-e-entrega-final)
 
 ## 1 COMPONENTES
 
@@ -36,14 +48,12 @@ Através da observação da dificuldade em gerir dados de clientes, pagamentos e
 
 ## 3 MINI-MUNDO
 
-    A ótica X atualmente realiza o controle de ordens de serviço e pagamentos de clientes manualmente, aspectos esses que mais impactam em sua receita. Contudo, existe uma grande dificuldade para verificar quando uma ordem de serviço foi solicitada, ou quando um pagamento deve ser realizado. Assim, a ótica tem interesse em um sistema que possa automatizar tais interações e extrair relatórios do sistema, como pagamentos a serem recebidos em certo mês, ordens de serviço solicitadas, funcionários mais ativos, receita bruta, entre outros.
+> A ótica X atualmente realiza o controle de ordens de serviço e pagamentos de clientes manualmente, aspectos esses que mais impactam em sua receita. Contudo, existe uma grande dificuldade para verificar quando uma ordem de serviço foi solicitada, ou quando um pagamento deve ser realizado. Assim, a ótica tem interesse em um sistema que possa automatizar tais interações e extrair relatórios do sistema, como pagamentos a serem recebidos em certo mês, ordens de serviço solicitadas, funcionários mais ativos, receita bruta, entre outros.
 
-    O processo atualmente ocorre da seguinte forma:
-        a. Um cliente solicita uma venda. Caso ele já possua ficha no estabelecimento, sua ficha é resgatada; caso contrário, é criada. A venda pode ser sobre vários items, como armações e lentes.
-
-        b. Caso um item seja uma lente, será necessário o envio de uma ordem de serviço para um laboratório para produzir a lente (e montar caso acompanhe a armação). A lente é feita com base em uma receita prescrita por um profissinal oftalmologista.
-
-        c. Uma vez que o laboratório entrega a ordem de serviço, o cliente é notificado e pode buscar o item na loja.
+> O processo atualmente ocorre da seguinte forma:
+>- Um cliente solicita uma venda. Caso ele já possua ficha no estabelecimento, sua ficha é resgatada; caso contrário, é criada. A venda pode ser sobre vários items, como armações e lentes.
+>- Caso um item seja uma lente, será necessário o envio de uma ordem de serviço para um laboratório para produzir a lente (e montar caso acompanhe a armação). A lente é feita com base em uma receita prescrita por um profissinal oftalmologista.
+>- Uma vez que o laboratório entrega a ordem de serviço, o cliente é notificado e pode buscar o item na loja.
 
 ## 4 RASCUNHOS BÁSICOS DA INTERFACE
 
@@ -57,11 +67,11 @@ Através da observação da dificuldade em gerir dados de clientes, pagamentos e
 
 ### 5.2 DECISÕES DE PROJETO
 
-    Campos Id: Todos os campos que se referem à `id`s foram implementados utilizando o tipo [`uuid`](https://www.postgresql.org/docs/9.1/datatype-uuid.html). Essa decisão foi tomada para evitar problemas futuros ao realizar merge com réplicas do banco de dados, onde chaves poderiam colidir. Outro motivo por trás dessa decisão é obscurecer a chave primária, uma vez que essa pode ser exposta em um web-service.
+> **Campos Id**: Todos os campos que se referem à `id`s foram implementados utilizando o tipo [`uuid`](https://www.postgresql.org/docs/9.1/datatype-uuid.html). Essa decisão foi tomada para evitar problemas futuros ao realizar merge com réplicas do banco de dados, onde chaves poderiam colidir. Outro motivo por trás dessa decisão é obscurecer a chave primária, uma vez que essa pode ser exposta em um web-service.
 
-    Perfis: Ao invés de herança, foi adotada uma estratégia focada em perfis: uma entidade do sistema possui vários perfis. Perfis possuem tipos (definidos na tabela `profile_schemas`), e seus atributos são representados na tabela `profile_characteristics`. Isso permite que novos atributos possam ser adicionados ou desabilitados sem que a estrutura do banco de dados mude, abrindo mão de performance.
-
-    Itens: No mini-mundo, uma venda é constituida por itens e ordens de serviço. Porém, ordens de serviços também podem conter itens. Optou-se para que a tabela `items_stock` possua ambas as chaves estrangeiras, existindo a possibilidade que o campo `service_id` seja nulo.
+> **Perfis**: Ao invés de herança, foi adotada uma estratégia focada em perfis: uma entidade do sistema possui vários perfis. Perfis possuem tipos (definidos na tabela `profile_schemas`), e seus atributos são representados na tabela `profile_characteristics`. Isso permite que novos atributos possam ser adicionados ou desabilitados sem que a estrutura do banco de dados mude, abrindo mão de performance.
+ 
+> **Itens**: No mini-mundo, uma venda é constituida por itens e ordens de serviço. Porém, ordens de serviços também podem conter itens. Optou-se para que a tabela `items_stock` possua ambas as chaves estrangeiras, existindo a possibilidade que o campo `service_id` seja nulo.
 
 ### 5.3 DESCRIÇÃO DOS DADOS
 
@@ -126,20 +136,35 @@ Através da observação da dificuldade em gerir dados de clientes, pagamentos e
 
 ![Seed](https://i.imgur.com/ydPTiL1.gif)
 
-### 8.1 DETALHAMENTO DAS INFORMAÇÕES
+### 8.1 SCRIPT PARA CRIAÇÃO DE TABELAS E INSERÇÃO DOS DADOS
 
-        Detalhamento sobre as informações e processo de obtenção ou geração dos dados.
-        Referenciar todas as fontes referentes a:
-        a) obtenção dos dados
-        b) obtenção de códigos reutilizados
-        c) fontes de estudo para desenvolvimento do projeto
-
-### 8.2 SCRIPT PARA CRIAÇÃO DE TABELAS E INSERÇÃO DOS DADOS
-
-    Verificar `create.sql` na pasta artifacts/sql.
+> Verificar `create.sql` na pasta artifacts/sql.
 
 ## 9 TABELAS E PRINCIPAIS CONSULTAS
 
+> `select * from contacts limit 100`
+![](https://i.imgur.com/KpgpBTm.png)
+
+
+> `select * from invoices limit 100`
+![](https://i.imgur.com/jYvd5vh.png)
+
+> `select * from items_stock limit 100`
+![](https://i.imgur.com/DW8qnYy.png)
+
+> `select * from sales limit 100`
+![](https://i.imgur.com/IUONLzc.png)
+
+sql```
+select profile_characteristics.characteristic_info, count(*) as total_sales from user_characteristics
+join schema_characteristics on schema_characteristics.characteristic_id = user_characteristics.id
+join profile_characteristics on profile_characteristics.schema_characteristic_id = schema_characteristics.id
+join profiles on profiles.id = profile_characteristics.profile_id
+join sales on sales.executor_profile_id = profiles.id
+where user_characteristics.id = 'fed3941a-99a0-4077-880e-a466be5040c4'
+group by profile_characteristics.characteristic_info```
+
+![](https://i.imgur.com/xRibtGz.png)
 ### 9.4 LISTA DE CODIGOS DAS FUNÇÕES, ASSERÇOES E TRIGGERS
 
         Detalhamento sobre funcionalidade de cada código.
