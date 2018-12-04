@@ -26,10 +26,10 @@ Trabalho desenvolvido durante a disciplina de Banco de Dados II.
         - [8.1 SCRIPT PARA CRIAÇÃO DE TABELAS E INSERÇÃO DOS DADOS](#81-script-para-cria%C3%A7%C3%A3o-de-tabelas-e-inser%C3%A7%C3%A3o-dos-dados)
     - [9 TABELAS E PRINCIPAIS CONSULTAS](#9-tabelas-e-principais-consultas)
         - [9.4 LISTA DE CODIGOS DAS FUNÇÕES, ASSERÇOES E TRIGGERS](#94-lista-de-codigos-das-fun%C3%A7%C3%B5es-asser%C3%A7oes-e-triggers)
-        - [9.5 Administração do banco de dados](#95-administra%C3%A7%C3%A3o-do-banco-de-dados)
-        - [9.6 GERACAO DE DADOS (MÍNIMO DE 1,5 MILHÃO DE REGISTROS PARA PRINCIPAL RELAÇAO)](#96-geracao-de-dados-m%C3%ADnimo-de-15-milh%C3%A3o-de-registros-para-principal-rela%C3%A7ao)
-        - [9.7 BACKUP](#97-backup)
-        - [9.8 APLICAÇAO DE ÍNDICES E TESTES DE PERFORMANCE](#98-aplica%C3%A7ao-de-%C3%ADndices-e-testes-de-performance)
+            - [9.4.1 `AUTH`](#941-auth)
+        - [9.5 GERACAO DE DADOS (MÍNIMO DE 1,5 MILHÃO DE REGISTROS PARA PRINCIPAL RELAÇAO)](#95-geracao-de-dados-m%C3%ADnimo-de-15-milh%C3%A3o-de-registros-para-principal-rela%C3%A7ao)
+        - [9.6 BACKUP](#96-backup)
+        - [9.7 APLICAÇAO DE ÍNDICES E TESTES DE PERFORMANCE](#97-aplica%C3%A7ao-de-%C3%ADndices-e-testes-de-performance)
         - [9.9 TRABALHO EM DUPLA - Machine Learning e Data Mining](#99-trabalho-em-dupla---machine-learning-e-data-mining)
         - [Estudar algum dos algoritmos abaixo](#estudar-algum-dos-algoritmos-abaixo)
         - [Incluir no trabalho os seguintes tópicos:](#incluir-no-trabalho-os-seguintes-t%C3%B3picos)
@@ -130,7 +130,7 @@ Através da observação da dificuldade em gerir dados de clientes, pagamentos e
 
 ## 7 MODELO FÍSICO
 
-![ModeloFisico](https://i.imgur.com/14QkrIz.png)
+![ModeloFisico](https://i.imgur.com/fHz0c1G.png)
 
 ## 8 INSERT APLICADO NAS TABELAS DO BANCO DE DADOS
 
@@ -143,55 +143,67 @@ Através da observação da dificuldade em gerir dados de clientes, pagamentos e
 ## 9 TABELAS E PRINCIPAIS CONSULTAS
 
 ```sql
-select * from contacts limit 100
+SELECT * FROM CONTACTS LIMIT 100
 ```
 ![](https://i.imgur.com/KpgpBTm.png)
 
 
 ```sql
-select * from invoices limit 100
+SELECT * FROM INVOICES LIMIT 100
 ```
 ![](https://i.imgur.com/jYvd5vh.png)
 
 ```sql
-select * from items_stock limit 100
+SELECT * FROM ITEMS_STOCK LIMIT 100
 ```
 ![](https://i.imgur.com/DW8qnYy.png)
 
 ```sql
-select * from sales limit 100
+SELECT * FROM SALES LIMIT 100
 ```
 ![](https://i.imgur.com/IUONLzc.png)
 
 ```sql
-select profile_characteristics.characteristic_info, count(*) as total_sales from user_characteristics
-join schema_characteristics on schema_characteristics.characteristic_id = user_characteristics.id
-join profile_characteristics on profile_characteristics.schema_characteristic_id = schema_characteristics.id
-join profiles on profiles.id = profile_characteristics.profile_id
-join sales on sales.executor_profile_id = profiles.id
-where user_characteristics.id = 'fed3941a-99a0-4077-880e-a466be5040c4'
-group by profile_characteristics.characteristic_info
+SELECT PROFILE_CHARACTERISTICS.CHARACTERISTIC_INFO, COUNT(*) AS TOTAL_SALES FROM USER_CHARACTERISTICS
+JOIN SCHEMA_CHARACTERISTICS ON SCHEMA_CHARACTERISTICS.CHARACTERISTIC_ID = USER_CHARACTERISTICS.ID
+JOIN PROFILE_CHARACTERISTICS ON PROFILE_CHARACTERISTICS.SCHEMA_CHARACTERISTIC_ID = SCHEMA_CHARACTERISTICS.ID
+JOIN PROFILES ON PROFILES.ID = PROFILE_CHARACTERISTICS.PROFILE_ID
+JOIN SALES ON SALES.EXECUTOR_PROFILE_ID = PROFILES.ID
+WHERE USER_CHARACTERISTICS.ID = 'FED3941A-99A0-4077-880E-A466BE5040C4'
+GROUP BY PROFILE_CHARACTERISTICS.CHARACTERISTIC_INFO
 ```
 
 ![](https://i.imgur.com/xRibtGz.png)
 ### 9.4 LISTA DE CODIGOS DAS FUNÇÕES, ASSERÇOES E TRIGGERS
 
-        Detalhamento sobre funcionalidade de cada código.
-        a) Objetivo
-        b) Código do objeto (função/trigger/asserção)
-        c) exemplo de dados para aplicação
-        d) resultados em forma de tabela/imagem
+#### 9.4.1 `AUTH`
 
-### 9.5 Administração do banco de dados
+Retorna o perfil do cliente caso os dados de entrada (`email` e `password`) sejam válidos. Caso contrário, retorna `null`.
+```sql
+CREATE OR REPLACE FUNCTION AUTH(EMAIL VARCHAR(256), PASSWORD VARCHAR(512)) RETURNS UUID AS
+$$
+BEGIN
+  RETURN (SELECT PROFILE_ID
+          FROM PROFILE_CHARACTERISTICS
+                 JOIN SCHEMA_CHARACTERISTICS SC ON PROFILE_CHARACTERISTICS.SCHEMA_CHARACTERISTIC_ID = SC.ID
+                 JOIN USER_CHARACTERISTICS UC ON SC.CHARACTERISTIC_ID = UC.ID
+                 JOIN PROFILES PROFILE ON PROFILE_CHARACTERISTICS.PROFILE_ID = PROFILE.ID
+          WHERE CHARACTERISTIC_INFO = $1
+             OR CHARACTERISTIC_INFO = $2
+          GROUP BY PROFILE_ID
+          HAVING COUNT(*) = 2);
+END;
+$$ LANGUAGE plpgsql;
+```
 
-        Descrição detalhada sobre como serão executadas no banco de dados as
-        seguintes atividades.
-        a) Segurança e autorização de acesso: especificação básica de configurações de acesso remoto
-        b) Estimativas de aquisição de recursos para armazenamento e processamento da informação
-        c) Planejamento de rotinas de manutenção e monitoramento do banco
-        d) Plano com frequencia de análises visando otimização de performance
+Exemplo:
+```sql
+SELECT AUTH('stephen92@frank.com', 'O&HcDIny&3');
+```
 
-### 9.6 GERACAO DE DADOS (MÍNIMO DE 1,5 MILHÃO DE REGISTROS PARA PRINCIPAL RELAÇAO)
+![](https://i.imgur.com/7C73TO1.png)
+
+### 9.5 GERACAO DE DADOS (MÍNIMO DE 1,5 MILHÃO DE REGISTROS PARA PRINCIPAL RELAÇAO)
 
 | Tabela                    | Quantidade de registros |
 | :-----------------------: | :---------------------: |
@@ -213,17 +225,11 @@ group by profile_characteristics.characteristic_info
 | `statuses`                | 3                       |
 | `user_characteristics`    | 3                       |
 
-### 9.7 BACKUP
+### 9.6 BACKUP
 
-        Detalhamento do backup.
-        a) Tempo
-        b) Tamanho
-        c) Teste de restauração (backup)
-        d) Tempo para restauração
-        e) Teste de restauração (script sql)
-        f) Tempo para restauração (script sql)
+![](https://i.imgur.com/ERONqEy.gif)
 
-### 9.8 APLICAÇAO DE ÍNDICES E TESTES DE PERFORMANCE
+### 9.7 APLICAÇAO DE ÍNDICES E TESTES DE PERFORMANCE
 
     a) Lista de índices, tipos de índices com explicação de porque foram implementados nas consultas
     b) Performance esperada VS Resultados obtidos

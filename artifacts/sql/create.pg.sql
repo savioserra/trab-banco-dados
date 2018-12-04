@@ -1,212 +1,212 @@
---create extension pgcrypto;
+--CREATE EXTENSION PGCRYPTO;
 
-create table states
+CREATE TABLE STATES
 (
-  id uuid primary key default gen_random_uuid(),
-  name varchar(128) not null,
-  abbr varchar(2) not null
+  ID   UUID PRIMARY KEY DEFAULT GEN_RANDOM_UUID(),
+  NAME VARCHAR(128) NOT NULL,
+  ABBR VARCHAR(2)   NOT NULL
 );
 
-create table cities
+CREATE TABLE CITIES
 (
-  id uuid default gen_random_uuid(),
-  state_id uuid not null references states (id),
-  name varchar(256) not null,
+  ID       UUID DEFAULT GEN_RANDOM_UUID(),
+  STATE_ID UUID         NOT NULL REFERENCES STATES (ID),
+  NAME     VARCHAR(256) NOT NULL,
 
-  primary key (id, state_id)
+  PRIMARY KEY (ID, STATE_ID)
 );
 
-create table clients
+CREATE TABLE CLIENTS
 (
-  id uuid primary key default gen_random_uuid(),
-  created_at timestamp not null default current_timestamp
+  ID         UUID PRIMARY KEY   DEFAULT GEN_RANDOM_UUID(),
+  CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-create table addresses
+CREATE TABLE ADDRESSES
 (
-  id uuid primary key default gen_random_uuid(),
-  profile_id uuid references profiles (id),
-  city_id uuid not null,
-  state_id uuid not null,
-  street varchar(1024) not null,
-  district varchar(1024) not null,
-  zipcode varchar(128) not null,
+  ID         UUID PRIMARY KEY DEFAULT GEN_RANDOM_UUID(),
+  PROFILE_ID UUID REFERENCES PROFILES (ID),
+  CITY_ID    UUID          NOT NULL,
+  STATE_ID   UUID          NOT NULL,
+  STREET     VARCHAR(1024) NOT NULL,
+  DISTRICT   VARCHAR(1024) NOT NULL,
+  ZIPCODE    VARCHAR(128)  NOT NULL,
 
-  foreign key (city_id, state_id) references cities (id, state_id),
-  unique (profile_id)
+  FOREIGN KEY (CITY_ID, STATE_ID) REFERENCES CITIES (ID, STATE_ID),
+  UNIQUE (PROFILE_ID)
 );
 
-create table contact_types
+CREATE TABLE CONTACT_TYPES
 (
-  id uuid primary key default gen_random_uuid(),
-  name varchar(128) not null,
-  description varchar(1024)
+  ID          UUID PRIMARY KEY DEFAULT GEN_RANDOM_UUID(),
+  NAME        VARCHAR(128) NOT NULL,
+  DESCRIPTION VARCHAR(1024)
 );
 
-create table user_characteristics
+CREATE TABLE USER_CHARACTERISTICS
 (
-  id uuid primary key default gen_random_uuid(),
-  name varchar(256) not null,
-  description varchar(1024)
+  ID          UUID PRIMARY KEY DEFAULT GEN_RANDOM_UUID(),
+  NAME        VARCHAR(256) NOT NULL,
+  DESCRIPTION VARCHAR(1024)
 );
 
-create table profile_schemas
+CREATE TABLE PROFILE_SCHEMAS
 (
-  id uuid primary key default gen_random_uuid(),
-  name varchar(256) not null,
-  description varchar(1024)
+  ID          UUID PRIMARY KEY DEFAULT GEN_RANDOM_UUID(),
+  NAME        VARCHAR(256) NOT NULL,
+  DESCRIPTION VARCHAR(1024)
 );
 
-create table schema_characteristics
+CREATE TABLE SCHEMA_CHARACTERISTICS
 (
-  id uuid primary key default gen_random_uuid(),
-  profile_schema_id uuid not null references profile_schemas (id),
-  characteristic_id uuid not null references user_characteristics (id),
-  is_nullable boolean,
+  ID                UUID PRIMARY KEY DEFAULT GEN_RANDOM_UUID(),
+  PROFILE_SCHEMA_ID UUID NOT NULL REFERENCES PROFILE_SCHEMAS (ID),
+  CHARACTERISTIC_ID UUID NOT NULL REFERENCES USER_CHARACTERISTICS (ID),
+  IS_NULLABLE       BOOLEAN,
 
-  unique (profile_schema_id, characteristic_id)
+  UNIQUE (PROFILE_SCHEMA_ID, CHARACTERISTIC_ID)
 );
 
-create table profiles
+CREATE TABLE PROFILES
 (
-  id uuid primary key default gen_random_uuid(),
-  client_id uuid not null references clients (id),
-  profile_schema_id uuid not null references profile_schemas (id),
-  address_id uuid not null references addresses (id),
-  created_at timestamp not null default current_timestamp,
+  ID                UUID PRIMARY KEY   DEFAULT GEN_RANDOM_UUID(),
+  CLIENT_ID         UUID      NOT NULL REFERENCES CLIENTS (ID),
+  PROFILE_SCHEMA_ID UUID      NOT NULL REFERENCES PROFILE_SCHEMAS (ID),
+  ADDRESS_ID        UUID      NOT NULL REFERENCES ADDRESSES (ID),
+  CREATED_AT        TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-  unique (client_id, profile_schema_id)
+  UNIQUE (CLIENT_ID, PROFILE_SCHEMA_ID)
 );
 
-create table contacts
+CREATE TABLE CONTACTS
 (
-  id uuid primary key default gen_random_uuid(),
-  profile_id uuid not null references profiles (id),
-  contact_type_id uuid not null references contact_types (id),
-  contact_info varchar(256)
+  ID              UUID PRIMARY KEY DEFAULT GEN_RANDOM_UUID(),
+  PROFILE_ID      UUID NOT NULL REFERENCES PROFILES (ID),
+  CONTACT_TYPE_ID UUID NOT NULL REFERENCES CONTACT_TYPES (ID),
+  CONTACT_INFO    VARCHAR(256)
 );
 
-create table profile_characteristics
+CREATE TABLE PROFILE_CHARACTERISTICS
 (
-  id uuid primary key default gen_random_uuid(),
-  profile_id uuid not null references profiles (id),
-  schema_characteristic_id uuid not null references schema_characteristics (id),
-  characteristic_info varchar(1024) not null,
+  ID                       UUID PRIMARY KEY DEFAULT GEN_RANDOM_UUID(),
+  PROFILE_ID               UUID          NOT NULL REFERENCES PROFILES (ID),
+  SCHEMA_CHARACTERISTIC_ID UUID          NOT NULL REFERENCES SCHEMA_CHARACTERISTICS (ID),
+  CHARACTERISTIC_INFO      VARCHAR(1024) NOT NULL,
 
-  unique (profile_id, schema_characteristic_id)
+  UNIQUE (PROFILE_ID, SCHEMA_CHARACTERISTIC_ID)
 );
 
-create table payment_methods
+CREATE TABLE PAYMENT_METHODS
 (
-  id uuid primary key default gen_random_uuid(),
-  name varchar(128) not null
+  ID   UUID PRIMARY KEY DEFAULT GEN_RANDOM_UUID(),
+  NAME VARCHAR(128) NOT NULL
 );
 
-create table sales
+CREATE TABLE SALES
 (
-  id uuid primary key default gen_random_uuid(),
-  receiver_profile_id uuid references profiles (id),
-  executor_profile_id uuid not null references profiles (id),
-  client_profile_id uuid not null references profiles (id),
-  payment_method_id uuid not null references payment_methods (id),
-  date timestamp not null default current_timestamp,
-  discount numeric
+  ID                  UUID PRIMARY KEY   DEFAULT GEN_RANDOM_UUID(),
+  RECEIVER_PROFILE_ID UUID REFERENCES PROFILES (ID),
+  EXECUTOR_PROFILE_ID UUID      NOT NULL REFERENCES PROFILES (ID),
+  CLIENT_PROFILE_ID   UUID      NOT NULL REFERENCES PROFILES (ID),
+  PAYMENT_METHOD_ID   UUID      NOT NULL REFERENCES PAYMENT_METHODS (ID),
+  DATE                TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  DISCOUNT            NUMERIC
 );
 
-create table payments
+CREATE TABLE PAYMENTS
 (
-  id uuid primary key default gen_random_uuid(),
-  sale_id uuid not null references sales (id),
-  expected_date date not null,
-  actual_date date,
-  expected_value numeric not null,
-  actual_value numeric
+  ID             UUID PRIMARY KEY DEFAULT GEN_RANDOM_UUID(),
+  SALE_ID        UUID    NOT NULL REFERENCES SALES (ID),
+  EXPECTED_DATE  DATE    NOT NULL,
+  ACTUAL_DATE    DATE,
+  EXPECTED_VALUE NUMERIC NOT NULL,
+  ACTUAL_VALUE   NUMERIC
 );
 
-create table invoices
+CREATE TABLE INVOICES
 (
-  id uuid primary key default gen_random_uuid(),
-  profile_id uuid not null references profiles (id),
-  version numeric not null,
-  xml text not null
+  ID         UUID PRIMARY KEY DEFAULT GEN_RANDOM_UUID(),
+  PROFILE_ID UUID    NOT NULL REFERENCES PROFILES (ID),
+  VERSION    NUMERIC NOT NULL,
+  XML        TEXT    NOT NULL
 );
 
-create table statuses
+CREATE TABLE STATUSES
 (
-  id uuid primary key default gen_random_uuid(),
-  name varchar(128) not null,
-  description varchar(1024)
+  ID          UUID PRIMARY KEY DEFAULT GEN_RANDOM_UUID(),
+  NAME        VARCHAR(128) NOT NULL,
+  DESCRIPTION VARCHAR(1024)
 );
 
-create table item_categories
+CREATE TABLE ITEM_CATEGORIES
 (
-  id uuid primary key default gen_random_uuid(),
-  name varchar(128) not null
+  ID   UUID PRIMARY KEY DEFAULT GEN_RANDOM_UUID(),
+  NAME VARCHAR(128) NOT NULL
 );
 
-create table prescriptions
+CREATE TABLE PRESCRIPTIONS
 (
-  id uuid primary key default gen_random_uuid(),
-  profile_owner_id uuid references profiles (id),
-  profile_medic_id uuid references profiles (id),
-  date date not null
+  ID               UUID PRIMARY KEY DEFAULT GEN_RANDOM_UUID(),
+  PROFILE_OWNER_ID UUID REFERENCES PROFILES (ID),
+  PROFILE_MEDIC_ID UUID REFERENCES PROFILES (ID),
+  DATE             DATE NOT NULL
 );
 
-create table services
+CREATE TABLE SERVICES
 (
-  id uuid primary key default gen_random_uuid(),
-  sale_id uuid not null references sales (id),
-  profile_employee_id uuid not null references profiles (id),
-  prescription_id uuid references prescriptions (id),
-  invoice_id uuid references invoices (id),
-  price numeric not null
+  ID                  UUID PRIMARY KEY DEFAULT GEN_RANDOM_UUID(),
+  SALE_ID             UUID    NOT NULL REFERENCES SALES (ID),
+  PROFILE_EMPLOYEE_ID UUID    NOT NULL REFERENCES PROFILES (ID),
+  PRESCRIPTION_ID     UUID REFERENCES PRESCRIPTIONS (ID),
+  INVOICE_ID          UUID REFERENCES INVOICES (ID),
+  PRICE               NUMERIC NOT NULL
 );
 
-create table items_stock
+CREATE TABLE ITEMS_STOCK
 (
-  id uuid primary key default gen_random_uuid(),
-  invoice_id uuid not null references invoices (id),
-  category_id uuid not null references item_categories (id),
-  service_id uuid references services (id),
-  sale_id uuid references sales (id),
-  description varchar(1024),
-  cost_price numeric not null,
-  sale_price_spot numeric not null,
-  sale_price_forward numeric not null
+  ID                 UUID PRIMARY KEY DEFAULT GEN_RANDOM_UUID(),
+  INVOICE_ID         UUID    NOT NULL REFERENCES INVOICES (ID),
+  CATEGORY_ID        UUID    NOT NULL REFERENCES ITEM_CATEGORIES (ID),
+  SERVICE_ID         UUID REFERENCES SERVICES (ID),
+  SALE_ID            UUID REFERENCES SALES (ID),
+  DESCRIPTION        VARCHAR(1024),
+  COST_PRICE         NUMERIC NOT NULL,
+  SALE_PRICE_SPOT    NUMERIC NOT NULL,
+  SALE_PRICE_FORWARD NUMERIC NOT NULL
 );
 
-create table service_statuses
+CREATE TABLE SERVICE_STATUSES
 (
-  id uuid primary key default gen_random_uuid(),
-  status_id uuid not null references statuses (id),
-  service_id uuid not null references services (id),
-  profile_id uuid not null references profiles (id),
-  visualized boolean not null,
-  changed_at timestamp not null default current_timestamp
+  ID         UUID PRIMARY KEY   DEFAULT GEN_RANDOM_UUID(),
+  STATUS_ID  UUID      NOT NULL REFERENCES STATUSES (ID),
+  SERVICE_ID UUID      NOT NULL REFERENCES SERVICES (ID),
+  PROFILE_ID UUID      NOT NULL REFERENCES PROFILES (ID),
+  VISUALIZED BOOLEAN   NOT NULL,
+  CHANGED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-create table tokens
+CREATE TABLE TOKENS
 (
-  id uuid primary key default gen_random_uuid(),
-  client_id uuid not null references clients (id),
-  token varchar(256) not null,
-  type varchar(80) not null,
-  is_revoked boolean default false,
-  created_at timestamp,
-  updated_at timestamp
+  ID         UUID PRIMARY KEY DEFAULT GEN_RANDOM_UUID(),
+  CLIENT_ID  UUID         NOT NULL REFERENCES CLIENTS (ID),
+  TOKEN      VARCHAR(256) NOT NULL,
+  TYPE       VARCHAR(80)  NOT NULL,
+  IS_REVOKED BOOLEAN          DEFAULT FALSE,
+  CREATED_AT TIMESTAMP,
+  UPDATED_AT TIMESTAMP
 );
 
-create table prescription_characteristics
+CREATE TABLE PRESCRIPTION_CHARACTERISTICS
 (
-  id uuid primary key default gen_random_uuid(),
-  name varchar(256) not null,
-  abbr varchar(32) not null
+  ID   UUID PRIMARY KEY DEFAULT GEN_RANDOM_UUID(),
+  NAME VARCHAR(256) NOT NULL,
+  ABBR VARCHAR(32)  NOT NULL
 );
 
-create table prescription_infos
+CREATE TABLE PRESCRIPTION_INFOS
 (
-  id uuid primary key default gen_random_uuid(),
-  prescription_characteristic_id uuid not null references prescription_characteristics (id),
-  prescription_id uuid not null references prescriptions (id),
-  info numeric not null
+  ID                             UUID PRIMARY KEY DEFAULT GEN_RANDOM_UUID(),
+  PRESCRIPTION_CHARACTERISTIC_ID UUID    NOT NULL REFERENCES PRESCRIPTION_CHARACTERISTICS (ID),
+  PRESCRIPTION_ID                UUID    NOT NULL REFERENCES PRESCRIPTIONS (ID),
+  INFO                           NUMERIC NOT NULL
 );
