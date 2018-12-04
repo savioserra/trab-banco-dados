@@ -25,16 +25,11 @@ Trabalho desenvolvido durante a disciplina de Banco de Dados II.
     - [8 INSERT APLICADO NAS TABELAS DO BANCO DE DADOS](#8-insert-aplicado-nas-tabelas-do-banco-de-dados)
         - [8.1 SCRIPT PARA CRIAÇÃO DE TABELAS E INSERÇÃO DOS DADOS](#81-script-para-cria%C3%A7%C3%A3o-de-tabelas-e-inser%C3%A7%C3%A3o-dos-dados)
     - [9 TABELAS E PRINCIPAIS CONSULTAS](#9-tabelas-e-principais-consultas)
-        - [9.4 LISTA DE CODIGOS DAS FUNÇÕES, ASSERÇOES E TRIGGERS](#94-lista-de-codigos-das-fun%C3%A7%C3%B5es-asser%C3%A7oes-e-triggers)
-            - [9.4.1 `AUTH`](#941-auth)
-        - [9.5 GERACAO DE DADOS (MÍNIMO DE 1,5 MILHÃO DE REGISTROS PARA PRINCIPAL RELAÇAO)](#95-geracao-de-dados-m%C3%ADnimo-de-15-milh%C3%A3o-de-registros-para-principal-rela%C3%A7ao)
-        - [9.6 BACKUP](#96-backup)
-        - [9.7 APLICAÇAO DE ÍNDICES E TESTES DE PERFORMANCE](#97-aplica%C3%A7ao-de-%C3%ADndices-e-testes-de-performance)
-        - [9.9 TRABALHO EM DUPLA - Machine Learning e Data Mining](#99-trabalho-em-dupla---machine-learning-e-data-mining)
-        - [Estudar algum dos algoritmos abaixo](#estudar-algum-dos-algoritmos-abaixo)
-        - [Incluir no trabalho os seguintes tópicos:](#incluir-no-trabalho-os-seguintes-t%C3%B3picos)
-    - [Data de Entrega: (06/12/2018)](#data-de-entrega-06122018)
-    - [10 ATUALIZAÇÃO DA DOCUMENTAÇÃO/ SLIDES E ENTREGA FINAL](#10-atualiza%C3%A7%C3%A3o-da-documenta%C3%A7%C3%A3o-slides-e-entrega-final)
+        - [9.1 LISTA DE CODIGOS DAS FUNÇÕES, ASSERÇOES E TRIGGERS](#91-lista-de-codigos-das-fun%C3%A7%C3%B5es-asser%C3%A7oes-e-triggers)
+            - [9.1.1 `AUTH`](#911-auth)
+        - [9.2 GERACAO DE DADOS (MÍNIMO DE 1,5 MILHÃO DE REGISTROS PARA PRINCIPAL RELAÇAO)](#92-geracao-de-dados-m%C3%ADnimo-de-15-milh%C3%A3o-de-registros-para-principal-rela%C3%A7ao)
+        - [9.3 BACKUP](#93-backup)
+        - [9.4 APLICAÇAO DE ÍNDICES E TESTES DE PERFORMANCE](#94-aplica%C3%A7ao-de-%C3%ADndices-e-testes-de-performance)
 
 ## 1 COMPONENTES
 
@@ -174,9 +169,9 @@ GROUP BY PROFILE_CHARACTERISTICS.CHARACTERISTIC_INFO
 ```
 
 ![](https://i.imgur.com/xRibtGz.png)
-### 9.4 LISTA DE CODIGOS DAS FUNÇÕES, ASSERÇOES E TRIGGERS
+### 9.1 LISTA DE CODIGOS DAS FUNÇÕES, ASSERÇOES E TRIGGERS
 
-#### 9.4.1 `AUTH`
+#### 9.1.1 `AUTH`
 
 Retorna o perfil do cliente caso os dados de entrada (`email` e `password`) sejam válidos. Caso contrário, retorna `null`.
 ```sql
@@ -203,7 +198,7 @@ SELECT AUTH('stephen92@frank.com', 'O&HcDIny&3');
 
 ![](https://i.imgur.com/7C73TO1.png)
 
-### 9.5 GERACAO DE DADOS (MÍNIMO DE 1,5 MILHÃO DE REGISTROS PARA PRINCIPAL RELAÇAO)
+### 9.2 GERACAO DE DADOS (MÍNIMO DE 1,5 MILHÃO DE REGISTROS PARA PRINCIPAL RELAÇAO)
 
 | Tabela                    | Quantidade de registros |
 | :-----------------------: | :---------------------: |
@@ -225,11 +220,11 @@ SELECT AUTH('stephen92@frank.com', 'O&HcDIny&3');
 | `statuses`                | 3                       |
 | `user_characteristics`    | 3                       |
 
-### 9.6 BACKUP
+### 9.3 BACKUP
 
 ![](https://i.imgur.com/ERONqEy.gif)
 
-### 9.7 APLICAÇAO DE ÍNDICES E TESTES DE PERFORMANCE
+### 9.4 APLICAÇAO DE ÍNDICES E TESTES DE PERFORMANCE
 
     a) Lista de índices, tipos de índices com explicação de porque foram implementados nas consultas
     b) Performance esperada VS Resultados obtidos
@@ -238,37 +233,3 @@ SELECT AUTH('stephen92@frank.com', 'O&HcDIny&3');
     e) As imagens do Explain devem ser inclusas no trabalho, bem como explicações sobre os resultados obtidos.
     f) Inclusão de tabela mostrando as 10 execuções, excluindo-se o maior e menor tempos para cada consulta e
     obtendo-se a media dos outros valores como resultado médio final.
-
-### 9.9 TRABALHO EM DUPLA - Machine Learning e Data Mining
-
-### Estudar algum dos algoritmos abaixo
-
-### Incluir no trabalho os seguintes tópicos:
-
-- Explicação/Fundamentação teórica sobre o método, objetivos e restrições! (formato doc/odt ou PDF)
-- Onde/quando aplicar
-  > ##### Estudar e explicar artigo que aplique o método de mineração de dados/machine learning escolhido
-- exemplo de uso/aplicação
-  > ##### a) Implementar algoritmo de básico de exemplo obtido na literatura (enviar código executável junto do trabalho com detalhamento de explicação para uso passo a passo)
-  >
-  > ##### b) Aplicar em alguma base de dados aberta (governamental ou sites de datasets disponíveis), registrar e apresentar resultados e algoritmo desenvolvido.
-
-Exemplos de métodos/algoritmos a serem estudados
-
-- "Nearest Neighbors"
-- "Linear SVM"
-- "RBF SVM"
-- "Decision Tree"
-- "Random Forest"
-- Pca
-- "Naive Bayes"
-
-Referência: http://scikit-learn.org/stable/index.html
-
-Referências adicionais:
-Scikit learning Map : http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html
-Machine learning in Python with scikit-learn: https://www.youtube.com/playlist?list=PL5-da3qGB5ICeMbQuqbbCOQWcS6OYBr5A
-
-## Data de Entrega: (06/12/2018)
-
-## 10 ATUALIZAÇÃO DA DOCUMENTAÇÃO/ SLIDES E ENTREGA FINAL
