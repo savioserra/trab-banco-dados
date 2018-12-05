@@ -1,238 +1,235 @@
-# TRABALHO 01 : Título do trabalho
-Trabalho desenvolvido durante a disciplina de BD
+# TRABALHO 01 : ÓTICA
 
-    O referido projeto poderá ser:
-        a) Um novo sistema/projeto 
-        b) Uma expansão de sistema/projeto previamente desenvolvido em disciplinas anteriores 
-        (ex: Expansão dos módulos do sistema desenvolvidos em BD1 - incremento mínimo de 50% nos 
-        requisitos/complexidade)
-        c) Nas avaliações parciais do professor, o grupo deverá anotar todas as observaçoes que forem feitas pelo professor 
-        e pelo proprio grupo, enviar uma cópia das atividades por e-mail para o grupo e postar imediatamente estas observaçõe
-        como tarefas a serem realizadas como tarefas por meio do gerenciador de projetos do git.
-        d) Todas as tarefas devem ser realizadas e deve-se atentar para distribuição igualitária de atividades levando-se 
-        em consideração o peso destas.
-        e) Os tópicos numerados para cada atividade no devem ser removidos do trabalho. Entretanto, os conteúdos de exemplo 
-        em cada tópico devem ser substituídos pelo conteúdo do trabalho em desenvolvimento.
-        f) sprints de entrega serão quinzenais ou mensais definidos em aula juntamente com o professor
-    
-    OBS Importantes: 
-        a) Os projetos/sistemas propostos serão validados pelo professor e pela turma
-        b) Se possível é interessante que os novos sistemas estejam correlacionados com alguma área 
-        previamente estudada pelo aluno
-        c) Caso dependa de alguma instituição/parceiro externo, a base de dados e informações pertinentes 
-        a esta devem ser obtidas no prazo de até 15 dias apos aprovação da proposta do trabalho 
-        (caso contrário, nova proposta deverá ser apresentada a turma implicando logicamente em um prazo 
-        mais curto para realização das atividades e conclusão do trabalho)
-    
-DICA: 
-    O kickstart normalmente lança inovaçôes em termos de Sofwares e Apps, portanto pode ser interessante 
-    olhar os lançamentos recentes para incrementar as possibilidades e aguçar a criatividade, o que pode 
-    auxiliar o grupo com novas ideias na solução proposta. Acesse os links abaixo do para explorar sobre apps e softwares no Kickstarter.
-    <br>
-    https://www.kickstarter.com/discover/categories/technology/software
-    <br>
-    https://www.kickstarter.com/discover/categories/technology/apps
-# Sumário
+Trabalho desenvolvido durante a disciplina de Banco de Dados II.
 
-### 1	COMPONENTES<br>
-Integrantes do grupo<br>
+## SUMÁRIO
 
-### 2	INTRODUÇÃO E MOTIVAÇAO<br>
-Este documento contém a especificação do projeto do banco de dados <nome do projeto> e motivação da escolha realizada. <br>
-      
-### 3	MINI-MUNDO<br>
-Descrever o mini-mundo. Não deve ser maior do que 30 linhas <br>
+- [TRABALHO 01 : ÓTICA](#trabalho-01--%C3%B3tica)
+    - [SUMÁRIO](#sum%C3%A1rio)
+    - [1 COMPONENTES](#1-componentes)
+        - [1.1 Integrantes do grupo](#11-integrantes-do-grupo)
+    - [2 INTRODUÇÃO E MOTIVAÇÃO](#2-introdu%C3%A7%C3%A3o-e-motiva%C3%A7%C3%A3o)
+    - [3 MINI-MUNDO](#3-mini-mundo)
+    - [4 RASCUNHOS BÁSICOS DA INTERFACE](#4-rascunhos-b%C3%A1sicos-da-interface)
+    - [5 MODELO CONCEITUAL](#5-modelo-conceitual)
+        - [5.1 NOTACAO ENTIDADE RELACIONAMENTO](#51-notacao-entidade-relacionamento)
+        - [5.2 DECISÕES DE PROJETO](#52-decis%C3%B5es-de-projeto)
+        - [5.3 DESCRIÇÃO DOS DADOS](#53-descri%C3%A7%C3%A3o-dos-dados)
+            - [5.3.1 DOMÍNIO IDENTIDADE](#531-dom%C3%ADnio-identidade)
+            - [5.3.2 DOMÍNIO PAGAMENTO](#532-dom%C3%ADnio-pagamento)
+            - [5.3.3 DOMÍNIO FISCAL](#533-dom%C3%ADnio-fiscal)
+            - [5.3.4 DOMÍNIO SERVIÇO](#534-dom%C3%ADnio-servi%C3%A7o)
+            - [5.3.5 DOMÍNIO ESTOQUE](#535-dom%C3%ADnio-estoque)
+    - [6 MODELO LÓGICO](#6-modelo-l%C3%B3gico)
+    - [7 MODELO FÍSICO](#7-modelo-f%C3%ADsico)
+    - [8 INSERT APLICADO NAS TABELAS DO BANCO DE DADOS](#8-insert-aplicado-nas-tabelas-do-banco-de-dados)
+        - [8.1 SCRIPT PARA CRIAÇÃO DE TABELAS E INSERÇÃO DOS DADOS](#81-script-para-cria%C3%A7%C3%A3o-de-tabelas-e-inser%C3%A7%C3%A3o-dos-dados)
+    - [9 TABELAS E PRINCIPAIS CONSULTAS](#9-tabelas-e-principais-consultas)
+        - [9.1 LISTA DE CODIGOS DAS FUNÇÕES, ASSERÇOES E TRIGGERS](#91-lista-de-codigos-das-fun%C3%A7%C3%B5es-asser%C3%A7oes-e-triggers)
+            - [9.1.1 `AUTH`](#911-auth)
+        - [9.2 GERACAO DE DADOS (MÍNIMO DE 1,5 MILHÃO DE REGISTROS PARA PRINCIPAL RELAÇAO)](#92-geracao-de-dados-m%C3%ADnimo-de-15-milh%C3%A3o-de-registros-para-principal-rela%C3%A7ao)
+        - [9.3 BACKUP](#93-backup)
+        - [9.4 APLICAÇAO DE ÍNDICES E TESTES DE PERFORMANCE](#94-aplica%C3%A7ao-de-%C3%ADndices-e-testes-de-performance)
 
-### 4	RASCUNHOS BÁSICOS DA INTERFACE (MOCKUPS)<br>
-neste ponto a codificação não e necessária, somente as ideias de telas devem ser criadas, o princípio aqui é pensar na criação da interface para identificar possíveis informações a serem armazenadas ou descartadas <br>
+## 1 COMPONENTES
 
-Sugestão: https://balsamiq.com/products/mockups/<br>
+### 1.1 Integrantes do grupo
 
-![Alt text](https://github.com/discipbd2/topicos-trabalho/blob/master/balsamiq.png?raw=true "Title")
+- Sávio Santos Serra
 
+## 2 INTRODUÇÃO E MOTIVAÇÃO
 
-### 5	MODELO CONCEITUAL<br>
-#### 5.1 NOTACAO ENTIDADE RELACIONAMENTO
-![Alt text](https://github.com/discipbd2/topicos-trabalho/blob/master/sample_MC.png?raw=true "Modelo Conceitual")
-    
-     5.2 NOTACAO UML (Caso esteja fazendo a disciplina de Projeto)
-## Data de Entrega: (23/08/2018) 
-(Apresentação para o professor em sala de aula)
+Através da observação da dificuldade em gerir dados de clientes, pagamentos e vendas em uma ótica, pensou-se em um sistema que facilitasse essa gestão.
 
-#### 5.3 DECISÕES DE PROJETO
-    [atributo]: [descrição da decisão]
-    
-    EXEMPLO:
-    a) Campo endereço: em nosso projeto optamos por um campo multivalorado e composto, pois a empresa 
-    pode possuir para cada departamento mais de uma localização... 
-    b) justifique!
+## 3 MINI-MUNDO
 
-#### 5.4 DESCRIÇÃO DOS DADOS 
-    [objeto]: [descrição do objeto]
-    
-    EXEMPLO:
-    CLIENTE: Tabela que armazena as informações relativas ao cliente<br>
-    CPF: campo que armazena o número de Cadastro de Pessoa Física para cada cliente da empresa.<br>
+> A ótica X atualmente realiza o controle de ordens de serviço e pagamentos de clientes manualmente, aspectos esses que mais impactam em sua receita. Contudo, existe uma grande dificuldade para verificar quando uma ordem de serviço foi solicitada, ou quando um pagamento deve ser realizado. Assim, a ótica tem interesse em um sistema que possa automatizar tais interações e extrair relatórios do sistema, como pagamentos a serem recebidos em certo mês, ordens de serviço solicitadas, funcionários mais ativos, receita bruta, entre outros.
 
-### 6	MODELO LÓGICO<br>
-### 7	MODELO FÍSICO<br>
-### 8	INSERT APLICADO NAS TABELAS DO BANCO DE DADOS<br>
-#### 8.1 DETALHAMENTO DAS INFORMAÇÕES
-        Detalhamento sobre as informações e processo de obtenção ou geração dos dados.
-        Referenciar todas as fontes referentes a:
-        a) obtenção dos dados
-        b) obtenção de códigos reutilizados
-        c) fontes de estudo para desenvolvimento do projeto
-        
-#### 8.2 INCLUSÃO DO SCRIPT PARA CRIAÇÃO DE TABELAS E INSERÇÃO DOS DADOS (ARQUIVO ÚNICO COM):
-        a) inclusão das instruções para criação das tabelas e estruturas de amazenamento do BD
-        b) inclusão das instruções de inserção dos dados nas referidas tabelas
-        c) inclusão das instruções para execução de outros procedimentos necessários
+> O processo atualmente ocorre da seguinte forma:
+>- Um cliente solicita uma venda. Caso ele já possua ficha no estabelecimento, sua ficha é resgatada; caso contrário, é criada. A venda pode ser sobre vários items, como armações e lentes.
+>- Caso um item seja uma lente, será necessário o envio de uma ordem de serviço para um laboratório para produzir a lente (e montar caso acompanhe a armação). A lente é feita com base em uma receita prescrita por um profissinal oftalmologista.
+>- Uma vez que o laboratório entrega a ordem de serviço, o cliente é notificado e pode buscar o item na loja.
 
-### 9	TABELAS E PRINCIPAIS CONSULTAS<br>
-#### 9.1	GERACAO DE DADOS (MÍNIMO DE 10 REGISTROS PARA CADA TABELA NO BANCO DE DADOS)<br>
+## 4 RASCUNHOS BÁSICOS DA INTERFACE
 
-## Data de Entrega: (06/09/2018)
+<Inserir aqui>
 
-<br>
-OBS: Incluir para os tópicos 9.2 e 9.3 as instruções SQL + imagens (print da tela) mostrando os resultados.<br>
+## 5 MODELO CONCEITUAL
 
-#### 9.2	SELECT DAS TABELAS COM PRIMEIROS 10 REGISTROS INSERIDOS <br> 
-    
-<br>
+### 5.1 NOTACAO ENTIDADE RELACIONAMENTO
 
-#### 9.3	SELECT DAS VISÕES COM PRIMEIROS 10 REGISTROS DA VIEW <br>
-        a) Descrição da view sobre que grupos de usuários (operacional/estratégico) <br>
-        e necessidade ela contempla.
-        b) Descrição das permissões de acesso e usuários correlacionados (após definição <br>
-        destas características)
-        c) as funcionalidades informadas no minimundo ou nos mockups(protótipos), que representarem 
-        views do sistema (relatórios, informações disponíveis para os usuários, etc) devem estar 
-        presentes aqui. 
-<br>
+![Otica](https://i.imgur.com/RYtWGyO.png)
 
-#### 9.4	LISTA DE CODIGOS DAS FUNÇÕES, ASSERÇOES E TRIGGERS<br>
-        Detalhamento sobre funcionalidade de cada código.
-        a) Objetivo
-        b) Código do objeto (função/trigger/asserção)
-        c) exemplo de dados para aplicação
-        d) resultados em forma de tabela/imagem
-<br>
+### 5.2 DECISÕES DE PROJETO
 
-## Data de Entrega: (27/09/2018)
+> **Campos Id**: Todos os campos que se referem à `id`s foram implementados utilizando o tipo [`uuid`](https://www.postgresql.org/docs/9.1/datatype-uuid.html). Essa decisão foi tomada para evitar problemas futuros ao realizar merge com réplicas do banco de dados, onde chaves poderiam colidir. Outro motivo por trás dessa decisão é obscurecer a chave primária, uma vez que essa pode ser exposta em um web-service.
 
-#### 9.5	Administração do banco de dados<br>
-        Descrição detalhada sobre como serão executadas no banco de dados as <br>
-        seguintes atividades.
-        a) Segurança e autorização de acesso: especificação básica de configurações de acesso remoto
-        b) Estimativas de aquisição de recursos para armazenamento e processamento da informação
-        c) Planejamento de rotinas de manutenção e monitoramento do banco
-        d) Plano com frequencia de análises visando otimização de performance
-<br>
+> **Perfis**: Ao invés de herança, foi adotada uma estratégia focada em perfis: uma entidade do sistema possui vários perfis. Perfis possuem tipos (definidos na tabela `profile_schemas`), e seus atributos são representados na tabela `profile_characteristics`. Isso permite que novos atributos possam ser adicionados ou desabilitados sem que a estrutura do banco de dados mude, abrindo mão de performance.
+ 
+> **Itens**: No mini-mundo, uma venda é constituida por itens e ordens de serviço. Porém, ordens de serviços também podem conter itens. Optou-se para que a tabela `items_stock` possua ambas as chaves estrangeiras, existindo a possibilidade que o campo `service_id` seja nulo.
 
-#### 9.6	GERACAO DE DADOS (MÍNIMO DE 1,5 MILHÃO DE REGISTROS PARA PRINCIPAL RELAÇAO)<br>
-        a) principal tabela do sistema deve ter no mínimo 1,5 milhão de registros
-        b) tabelas diretamente relacionadas a tabela principal 100 mil registros
-        c) tabelas auxiliares de relacao multivalorada mínimo de 10 registros
-        d) registrar o tempo de inserção em cada uma das tabelas do banco de dados
-        e) especificar a quantidade de registros inseridos em cada tabela
-        Para melhor compreensão verifiquem o exemplo na base de testes:<br>
-        https://github.com/discipbd2/base-de-testes-locadora
-        
-## Data de Entrega: (31/10/2018)
+### 5.3 DESCRIÇÃO DOS DADOS
 
-#### 9.7	Backup do Banco de Dados<br>
-        Detalhamento do backup.
-        a) Tempo
-        b) Tamanho
-        c) Teste de restauração (backup)
-        d) Tempo para restauração
-        e) Teste de restauração (script sql)
-        f) Tempo para restauração (script sql)
-<br>
+#### 5.3.1 DOMÍNIO IDENTIDADE
+
+| Tabela                         | Descrição                                                                                                                                            |
+| :----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `states`                       | Relação de estados (localização).                                                                                                                    |
+| `cities`                       | Relação de cidades (localização).                                                                                                                    |
+| `clients`                      | Relação de entidades do sistema. Cada entidade possui vários perfis.                                                                                 |
+| `addresses`                    | Relação de endereços. Cada perfil possui no máximo um endereço.                                                                                      |
+| `contact_types`                | Relação dos tipos de dados de contatos, como telefone.                                                                                               |
+| `user_characteristics`         | Relação de todas as características que um perfil pode ter.                                                                                          |
+| `profile_schemas`              | Relação dos esquemas de perfis. Exemplo: Cliente, Funcionário, Médico.                                                                               |
+| `schema_characteristics`       | Junto com a tabela `profile_schemas`, define o conjunto de características que um determinado perfil pode ter. Exemplo: Funcionário: Senha, Login... |
+| `profiles`                     | Relação dos perfis existentes. Um perfil possui um esquema a qual pertence.                                                                          |
+| `contacts`                     | Relação das informações de contato dos perfis.                                                                                                       |
+| `profile_characteristics`      | Relação das informações dos perfis.                                                                                                                  |
+| `tokens`                       | Relação dos tokens de sessão de usuários logados.                                                                                                    |
+| `prescriptions`                | Relação das receitas médicas.                                                                                                                        |
+| `prescription_characteristics` | Relação dos tipos de dados das receitas.                                                                                                             |
+| `prescription_infos`           | Relação das informações das receitas.                                                                                                                |
+
+#### 5.3.2 DOMÍNIO PAGAMENTO
+
+| Tabela            | Descrição                                         |
+| :---------------- | ------------------------------------------------- |
+| `payment_methods` | Relação dos métodos de pagamento disponíveis.     |
+| `payments`        | Relação dos pagamentos (executados ou previstos). |
+| `sales`           | Relação das vendas.                               |
 
 
-#### 9.8	APLICAÇAO DE ÍNDICES E TESTES DE PERFORMANCE<br>
-    a) Lista de índices, tipos de índices com explicação de porque foram implementados nas consultas 
+
+#### 5.3.3 DOMÍNIO FISCAL
+
+| Tabela     | Descrição                  |
+| :--------- | -------------------------- |
+| `invoices` | Relação das notas fiscais. |
+
+#### 5.3.4 DOMÍNIO SERVIÇO
+
+| Tabela             | Descrição                                        |
+| :----------------- | ------------------------------------------------ |
+| `statuses`         | Relação dos estados que um serviço pode assumir. |
+| `services`         | Relação dos serviços.                            |
+| `service_statuses` | Relação do histórico de estados dos serviços.    |
+
+#### 5.3.5 DOMÍNIO ESTOQUE
+
+| Tabela            | Descrição                                                 |
+| :---------------- | --------------------------------------------------------- |
+| `items_stock`     | Relação de todos os itens.                                |
+| `item_categories` | Relação das categorias de itens. Exemplo: Armação, Lente. |
+
+## 6 MODELO LÓGICO
+
+## 7 MODELO FÍSICO
+
+![ModeloFisico](https://i.imgur.com/fHz0c1G.png)
+
+## 8 INSERT APLICADO NAS TABELAS DO BANCO DE DADOS
+
+![Seed](https://i.imgur.com/ydPTiL1.gif)
+
+### 8.1 SCRIPT PARA CRIAÇÃO DE TABELAS E INSERÇÃO DOS DADOS
+
+> Verificar `create.sql` na pasta artifacts/sql.
+
+## 9 TABELAS E PRINCIPAIS CONSULTAS
+
+```sql
+SELECT * FROM CONTACTS LIMIT 100
+```
+![](https://i.imgur.com/KpgpBTm.png)
+
+
+```sql
+SELECT * FROM INVOICES LIMIT 100
+```
+![](https://i.imgur.com/jYvd5vh.png)
+
+```sql
+SELECT * FROM ITEMS_STOCK LIMIT 100
+```
+![](https://i.imgur.com/DW8qnYy.png)
+
+```sql
+SELECT * FROM SALES LIMIT 100
+```
+![](https://i.imgur.com/IUONLzc.png)
+
+```sql
+SELECT PROFILE_CHARACTERISTICS.CHARACTERISTIC_INFO, COUNT(*) AS TOTAL_SALES FROM USER_CHARACTERISTICS
+JOIN SCHEMA_CHARACTERISTICS ON SCHEMA_CHARACTERISTICS.CHARACTERISTIC_ID = USER_CHARACTERISTICS.ID
+JOIN PROFILE_CHARACTERISTICS ON PROFILE_CHARACTERISTICS.SCHEMA_CHARACTERISTIC_ID = SCHEMA_CHARACTERISTICS.ID
+JOIN PROFILES ON PROFILES.ID = PROFILE_CHARACTERISTICS.PROFILE_ID
+JOIN SALES ON SALES.EXECUTOR_PROFILE_ID = PROFILES.ID
+WHERE USER_CHARACTERISTICS.ID = 'FED3941A-99A0-4077-880E-A466BE5040C4'
+GROUP BY PROFILE_CHARACTERISTICS.CHARACTERISTIC_INFO
+```
+
+![](https://i.imgur.com/xRibtGz.png)
+### 9.1 LISTA DE CODIGOS DAS FUNÇÕES, ASSERÇOES E TRIGGERS
+
+#### 9.1.1 `AUTH`
+
+Retorna o perfil do cliente caso os dados de entrada (`email` e `password`) sejam válidos. Caso contrário, retorna `null`.
+```sql
+CREATE OR REPLACE FUNCTION AUTH(EMAIL VARCHAR(256), PASSWORD VARCHAR(512)) RETURNS UUID AS
+$$
+BEGIN
+  RETURN (SELECT PROFILE_ID
+          FROM PROFILE_CHARACTERISTICS
+                 JOIN SCHEMA_CHARACTERISTICS SC ON PROFILE_CHARACTERISTICS.SCHEMA_CHARACTERISTIC_ID = SC.ID
+                 JOIN USER_CHARACTERISTICS UC ON SC.CHARACTERISTIC_ID = UC.ID
+                 JOIN PROFILES PROFILE ON PROFILE_CHARACTERISTICS.PROFILE_ID = PROFILE.ID
+          WHERE CHARACTERISTIC_INFO = $1
+             OR CHARACTERISTIC_INFO = $2
+          GROUP BY PROFILE_ID
+          HAVING COUNT(*) = 2);
+END;
+$$ LANGUAGE plpgsql;
+```
+
+Exemplo:
+```sql
+SELECT AUTH('stephen92@frank.com', 'O&HcDIny&3');
+```
+
+![](https://i.imgur.com/7C73TO1.png)
+
+### 9.2 GERACAO DE DADOS (MÍNIMO DE 1,5 MILHÃO DE REGISTROS PARA PRINCIPAL RELAÇAO)
+
+| Tabela                    | Quantidade de registros |
+| :-----------------------: | :---------------------: |
+| `addresses`               | 500                     |
+| `cities`                  | 50                      |
+| `clients`                 | 500                     |
+| `contact_types`           | 1                       |
+| `contacts`                | 500                     |
+| `invoices`                | 1000000                 |
+| `item_categories`         | 1                       |
+| `items_stock`             | 1000000                 |
+| `payment_methods`         | 2                       |
+| `profile_characteristics` | 1500                    |
+| `profile_schemas`         | 3                       |
+| `profiles`                | 500                     |
+| `sales`                   | 1000000                 |
+| `schema_characteristics`  | 9                       |
+| `states`                  | 10                      |
+| `statuses`                | 3                       |
+| `user_characteristics`    | 3                       |
+
+### 9.3 BACKUP
+
+![](https://i.imgur.com/ERONqEy.gif)
+
+### 9.4 APLICAÇAO DE ÍNDICES E TESTES DE PERFORMANCE
+
+    a) Lista de índices, tipos de índices com explicação de porque foram implementados nas consultas
     b) Performance esperada VS Resultados obtidos
     c) Tabela de resultados comparando velocidades antes e depois da aplicação dos índices (constando velocidade esperada com planejamento, sem indice e com índice Vs velocidade de execucao real com índice e sem índice).
     d) Escolher as consultas mais complexas para serem analisadas (consultas com menos de 2 joins não serão aceitas)
     e) As imagens do Explain devem ser inclusas no trabalho, bem como explicações sobre os resultados obtidos.
-    f) Inclusão de tabela mostrando as 10 execuções, excluindo-se o maior e menor tempos para cada consulta e 
+    f) Inclusão de tabela mostrando as 10 execuções, excluindo-se o maior e menor tempos para cada consulta e
     obtendo-se a media dos outros valores como resultado médio final.
-<br>
-
-## Data de Entrega: (22/11/2018)
-
-<br>   
-
-#### 9.9 TRABALHO EM DUPLA - Machine Learning e Data Mining
-### Estudar algum dos algoritmos abaixo
-### Incluir no trabalho os seguintes tópicos: 
-* Explicação/Fundamentação teórica sobre o método, objetivos e restrições! (formato doc/odt ou PDF)
-* Onde/quando aplicar 
-> ##### Estudar e explicar artigo que aplique o método de mineração de dados/machine learning escolhido
-* exemplo de uso/aplicação 
-> ##### a) Implementar algoritmo de básico de exemplo obtido na literatura (enviar código executável junto do trabalho com detalhamento de explicação para uso passo a passo)
-> #####  b) Aplicar em alguma base de dados aberta (governamental ou sites de datasets disponíveis), registrar e apresentar resultados e algoritmo desenvolvido.
-
-Exemplos de métodos/algoritmos a serem estudados
-* "Nearest Neighbors" 
-* "Linear SVM" 
-* "RBF SVM" 
-* "Decision Tree" 
-* "Random Forest"
-* Pca  
-* "Naive Bayes"
-<br>
-Referência: http://scikit-learn.org/stable/index.html
-<br>
-Referências adicionais:
-Scikit learning Map : http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html
-Machine learning in Python with scikit-learn: https://www.youtube.com/playlist?list=PL5-da3qGB5ICeMbQuqbbCOQWcS6OYBr5A
-
-
-
-<br>
-
-## Data de Entrega: (06/12/2018)
-
-
-### 10	ATUALIZAÇÃO DA DOCUMENTAÇÃO/ SLIDES E ENTREGA FINAL<br>
-       
-### 11  FORMATACAO NO GIT: https://help.github.com/articles/basic-writing-and-formatting-syntax/
-<comentario no git>
-    
-##### About Formatting
-    https://help.github.com/articles/about-writing-and-formatting-on-github/
-    
-##### Basic Formatting in Git
-    
-    https://help.github.com/articles/basic-writing-and-formatting-syntax/#referencing-issues-and-pull-requests
-    
-    
-##### Working with advanced formatting
-    https://help.github.com/articles/working-with-advanced-formatting/
-#### Mastering Markdown
-    https://guides.github.com/features/mastering-markdown/
-
-### OBSERVAÇÕES IMPORTANTES
-
-#### Todos os arquivos que fazem parte do projeto (Imagens, pdfs, arquivos fonte, etc..), devem estar presentes no GIT. Os arquivos do projeto vigente não devem ser armazenados em quaisquer outras plataformas.
-1. Caso existam arquivos com conteúdos sigilosos, comunicar o professor que definirá em conjunto com o grupo a melhor forma de armazenamento do arquivo.
-
-#### Todos os grupos deverão fazer Fork deste repositório e dar permissões administrativas ao usuário deste GIT, para acompanhamento do trabalho.
-
-#### Os usuários criados no GIT devem possuir o nome de identificação do aluno (não serão aceitos nomes como Eu123, meuprojeto, pro456, etc). Em caso de dúvida comunicar o professor.
-
-
-Link para BrModelo:<br>
-http://sis4.com/brModelo/brModelo/download.html
-<br>
-
-
-Link para curso de GIT<br>
-![https://www.youtube.com/curso_git](https://www.youtube.com/playlist?list=PLo7sFyCeiGUdIyEmHdfbuD2eR4XPDqnN2?raw=true "Title")
-
-
-
